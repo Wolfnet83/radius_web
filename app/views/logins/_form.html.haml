@@ -1,0 +1,10 @@
+.col-sm-6
+  = simple_form_for(@login) do |f|
+    .form-group
+      = f.input :username, label: "MAC адрес"
+      = f.input :given_name, label: "Имя"
+      = f.input :description, label: "Описание"
+      = f.input :comment, label: "Комментарий"
+    .form-group
+      = f.button :submit, 'Добавить', class: "btn btn-light"
+      = link_to t('common.cancel'), logins_path, class: "btn btn-primary"

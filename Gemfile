@@ -37,6 +37,11 @@ gem 'haml'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'safe_attributes'
+gem 'simple_form'
+gem 'erb2haml'
+
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
 
 group :development, :test do
   gem 'pry'

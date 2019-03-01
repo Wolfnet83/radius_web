@@ -1,8 +1,28 @@
-.h1
-  Hello mac table
+.row 
+  %table.table.table-striped.table-sm
+    %thead
+      %tr
+        %th
+          MAC адрес
+        %th
+          Имя пользователя
+        %th
+          Описание
+        %th
+          Комментарий
+    %tbody
+    - @logins.each do |login|
+      %tr
+        %td
+          = login.username
+        %td
+          = login.given_name
+        %td
+          = login.description
+        %td
+          = login.comment
 
-- @logins.each do |login|
-  = login.username
-  = login.given_name
-  = login.description
-  .br
+  = link_to "Добавить", new_login_path, class: "btn btn-primary" 
+.row 
+  .col-sm-12
+    = paginate @logins, theme: 'twitter-bootstrap-4'
