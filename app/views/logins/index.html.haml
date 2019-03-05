@@ -1,12 +1,27 @@
+-# .row
+-# .d-flex.justify-content-end
+-#   .col-4
+.card.my-2
+  .card-body
+    .row
+      .col-6
+        = form_with url: logins_path, method: 'get', class: "form-inline", local: true do
+          = text_field_tag :mac_filter, '', placeholder: "mac address...", class: "form-control mr-sm-2"
+          = submit_tag 'Filter', class: "btn btn-outline-success my-2 my-sm-0"
+      .col-6
+        .d-flex.justify-content-end
+          = link_to "Add", new_login_path, class: "btn btn-outline-primary"
+
 .row 
   .col
     %table.table.table-striped.table-sm
       %thead
         %tr
           %th
-            MAC адрес
+            = sortable 'username', "MAC адрес"
+            %span.iconic.iconic-star
           %th
-            Имя пользователя
+            = sortable 'given_name', "Имя пользователя"
           %th
             Описание
           %th
@@ -25,15 +40,13 @@
           %td
             = login.comment
           %td
-            .btn-group
-              = link_to t('common.edit'), edit_login_path(login.id),
-                                        class: "btn btn-sm btn-outline-primary"
-              = link_to t('common.delete'), login_path(login.id),
-                                  method: :delete, class: "btn btn-sm btn-outline-danger",
-                                  data: { confirm: 'Sure?' }
-.row
-  .col-6
-    = link_to "Добавить", new_login_path, class: "btn btn-sm btn-outline-primary" 
+            .d-flex.justify-content-end
+              .btn-group
+                = link_to t('common.edit'), edit_login_path(login.id),
+                                          class: "btn btn-sm btn-outline-primary"
+                = link_to t('common.delete'), login_path(login.id),
+                                    method: :delete, class: "btn btn-sm btn-outline-danger",
+                                    data: { confirm: 'Sure?' }
 
-  .col-6
-    = paginate @logins, theme: 'twitter-bootstrap-4'
+.d-flex.justify-content-end
+  = paginate @logins, theme: 'twitter-bootstrap-4'

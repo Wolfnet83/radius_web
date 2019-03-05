@@ -1,6 +1,12 @@
 class LoginsController < ApplicationController
+
+  helper_method :sort_column, :sort_direction
+
   def index
-    @logins = Login.page params[:page]
+    @logins = Login.order(sort_column + ' ' + sort_direction).page params[:page]
+    if params[:mac_filter].present?
+      @logins = @logins.where("username like '%#{params[:mac_filter]}%'")
+    end
   end
 
   def new
@@ -14,9 +20,9 @@ class LoginsController < ApplicationController
     @login.op = ':='
     if @login.valid?
       @login.save
-      redirect_to logins_path, notice: "Добавлено"
+      redirect_to logins_path, flash: { success: "Успешно добавлено" }
     else
-      # flash[:alert] = 'Неудача'
+      flash[:alert] = 'Не удалось создать'
       render "new"
     end
   end
@@ -28,7 +34,7 @@ class LoginsController < ApplicationController
   def destroy
     @login = Login.find(params[:id])
     @login.destroy
-    redirect_to logins_path
+    redirect_back(fallback_location: logins_path)
   end
 
   def update
@@ -44,4 +50,13 @@ class LoginsController < ApplicationController
   def permitted_params
     params[:login].permit(:username, :given_name, :description, :comment)
   end
+
+  def sort_column
+    Login.column_names.include?(params[:sort_by]) ? params[:sort_by] : 'id'
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:dir]) ? params[:dir] : 'asc'
+  end
+
 end
