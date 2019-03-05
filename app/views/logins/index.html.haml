@@ -1,28 +1,39 @@
 .row 
-  %table.table.table-striped.table-sm
-    %thead
-      %tr
-        %th
-          MAC адрес
-        %th
-          Имя пользователя
-        %th
-          Описание
-        %th
-          Комментарий
-    %tbody
-    - @logins.each do |login|
-      %tr
-        %td
-          = login.username
-        %td
-          = login.given_name
-        %td
-          = login.description
-        %td
-          = login.comment
+  .col
+    %table.table.table-striped.table-sm
+      %thead
+        %tr
+          %th
+            MAC адрес
+          %th
+            Имя пользователя
+          %th
+            Описание
+          %th
+            Комментарий
+          %th
+            Действия
+      %tbody
+      - @logins.each do |login|
+        %tr
+          %td
+            = login.username
+          %td
+            = login.given_name
+          %td
+            = login.description
+          %td
+            = login.comment
+          %td
+            .btn-group
+              = link_to t('common.edit'), edit_login_path(login.id),
+                                        class: "btn btn-sm btn-outline-primary"
+              = link_to t('common.delete'), login_path(login.id),
+                                  method: :delete, class: "btn btn-sm btn-outline-danger",
+                                  data: { confirm: 'Sure?' }
+.row
+  .col-6
+    = link_to "Добавить", new_login_path, class: "btn btn-sm btn-outline-primary" 
 
-  = link_to "Добавить", new_login_path, class: "btn btn-primary" 
-.row 
-  .col-sm-12
+  .col-6
     = paginate @logins, theme: 'twitter-bootstrap-4'

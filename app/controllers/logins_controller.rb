@@ -21,6 +21,25 @@ class LoginsController < ApplicationController
     end
   end
 
+  def edit
+    @login = Login.find(params[:id])
+  end
+
+  def destroy
+    @login = Login.find(params[:id])
+    @login.destroy
+    redirect_to logins_path
+  end
+
+  def update
+    @login = Login.find(params[:id])
+    if @login.update_attributes(permitted_params)
+      redirect_to logins_path, notice: 'Updated'
+    else
+      render "edit"
+    end
+  end
+
   private
   def permitted_params
     params[:login].permit(:username, :given_name, :description, :comment)
