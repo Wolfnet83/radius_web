@@ -1,0 +1,10 @@
+.row.justify-content-center
+  .col-6
+    %h3
+    = form_with  url: sessions_path do
+      .form-group
+        = text_field_tag :username, '', class: 'form-control', placeholder: 'Username'
+      .form-group
+        = password_field_tag :password, '', class: 'form-control', placeholder: 'Password'
+      .form-group
+        = submit_tag "Login", class: 'btn btn-primary'

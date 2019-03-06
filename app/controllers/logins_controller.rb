@@ -1,4 +1,5 @@
 class LoginsController < ApplicationController
+  before_action :authorize
 
   helper_method :sort_column, :sort_direction
 

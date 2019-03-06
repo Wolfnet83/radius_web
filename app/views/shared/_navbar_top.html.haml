@@ -2,6 +2,10 @@
   = link_to 'AquaRadius', logins_path, class: 'navbar-brand'
   .collapse.navbar-collapse
     %ul.navbar-nav
+    %ul.nav.navbar-nav.ml-auto
+      %li
+        - if current_user
+          = link_to t('common.logout'), sign_out_path, class: 'nav-link'
       -# %li.nav-item
       -#   Add
       -# %li.nav-item
