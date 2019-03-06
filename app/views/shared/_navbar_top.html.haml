@@ -2,9 +2,14 @@
   = link_to 'AquaRadius', logins_path, class: 'navbar-brand'
   .collapse.navbar-collapse
     %ul.navbar-nav
+      - if current_user
+        %li
+          = link_to 'Клиенты', logins_path, class: 'nav-link'
+        %li
+          = link_to 'Попытки входа', login_status_path, class: 'nav-link'
     %ul.nav.navbar-nav.ml-auto
-      %li
-        - if current_user
+      - if current_user
+        %li
           = link_to t('common.logout'), sign_out_path, class: 'nav-link'
       -# %li.nav-item
       -#   Add
