@@ -1,0 +1,27 @@
+.row 
+  .col
+    %table.table.table-striped.table-sm
+      %thead
+        %tr
+          %th
+            MAC
+          %th
+            Пользователь
+          %th
+            Ответ
+          %th
+            Дата
+      %tbody
+      - @login_status.each do |ls|
+        %tr
+          %td
+            = ls.username
+          %td
+            = ls.given_name
+          %td
+            = ls.reply
+          %td
+            = ls.authdate
+
+.d-flex.justify-content-end
+  = paginate @login_status, theme: 'twitter-bootstrap-4'
