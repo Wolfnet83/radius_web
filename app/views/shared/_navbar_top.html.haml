@@ -10,6 +10,8 @@
     %ul.nav.navbar-nav.ml-auto
       - if current_user
         %li
+          = link_to 'Очистить базу', clear_db_path, class: 'nav-link'
+        %li
           = link_to t('common.logout'), sign_out_path, class: 'nav-link'
       -# %li.nav-item
       -#   Add
